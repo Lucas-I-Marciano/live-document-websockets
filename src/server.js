@@ -24,6 +24,9 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
+  socket.on("keyupEvent", (text) => {
+    console.log(text);
+  });
 });
 
 server.listen(port, () => {
