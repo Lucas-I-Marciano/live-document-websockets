@@ -1,11 +1,11 @@
-const socket = io();
+import { socketEmitEvent } from "./document-socket.js";
 
-const textEditor = document.getElementById("text-editor");
+export const textEditor = document.getElementById("text-editor");
 
 textEditor.addEventListener("keyup", () => {
-  socket.emit("keyupEvent", textEditor.value);
+  socketEmitEvent("keyupEvent", textEditor.value);
 });
 
-socket.on("text_value_server_to_client", (arg) => {
-  textEditor.value = arg;
-});
+export function updateTextEditor(text) {
+  textEditor.value = text;
+}
