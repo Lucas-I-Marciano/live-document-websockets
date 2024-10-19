@@ -3,6 +3,7 @@ import { createServer } from "http";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
 import { Server } from "socket.io";
+import "./database-connection.js";
 
 const app = express();
 const server = createServer(app);
