@@ -20,3 +20,9 @@ export async function updateDocument(documentName, documentText) {
   );
   return result;
 }
+
+export function getAllDocuments() {
+  const cursorResult = documents.find();
+
+  return cursorResult;
+}

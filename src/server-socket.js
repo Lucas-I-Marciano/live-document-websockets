@@ -1,5 +1,9 @@
 import { io } from "./server.js";
-import { findDocument, updateDocument } from "./database-operations.js";
+import {
+  findDocument,
+  updateDocument,
+  getAllDocuments,
+} from "./database-operations.js";
 
 const documentText = {
   JavaScript: "Javas",
@@ -10,6 +14,15 @@ const documentText = {
 io.on("connection", (socket) => {
   // console.log(`a user connected. ID: ${socket.id}`);
 
+  // Index socket
+  socket.on("loadIndex", async () => {
+    const cursor = await getAllDocuments();
+    cursor.forEach((document) => {
+      socket.emit("documentNameToIndex", document["name"]);
+    });
+  });
+
+  // Document socket
   socket.on("documentName", async (arg) => {
     const document = await findDocument(arg);
     socket.join(document.name);
