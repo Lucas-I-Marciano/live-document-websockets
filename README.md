@@ -8,10 +8,9 @@ Connects text documents via websocket, enabling real-time communication between 
 
 Check out this demo video to see the project in action:
 
-<video width="1000" controls>
-  <source src="img/01.intro.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://github.com/user-attachments/assets/9eb67e7c-19b3-48e2-9be1-6252b847bd9b
+
+
 
 ## ✨ Features
 
