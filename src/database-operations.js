@@ -34,3 +34,10 @@ export function createDocument(documentName) {
   });
   return result;
 }
+
+export function deleteDocument(documentName) {
+  const result = documents.deleteOne({
+    name: documentName,
+  });
+  return result;
+}

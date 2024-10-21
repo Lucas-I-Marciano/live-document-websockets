@@ -1,4 +1,4 @@
-import { updateTextEditor } from "./document.js";
+import { returnHomeFromDocument, updateTextEditor } from "./document.js";
 
 const socket = io();
 
@@ -12,4 +12,8 @@ socket.on("textLoadedServerToClient", (arg) => {
 
 socket.on("text_value_server_to_client", (arg) => {
   updateTextEditor(arg);
+});
+
+socket.on("documentDeleted", (documentName) => {
+  returnHomeFromDocument(documentName);
 });

@@ -12,6 +12,10 @@ socket.on("documentCreated", () => {
   reloadIndexPage();
 });
 
+socket.on("documentDeleted", (documentName) => {
+  reloadIndexPage();
+});
+
 export function emitGeneralEvent(eventName, arg) {
   socket.emit(eventName, arg);
 }

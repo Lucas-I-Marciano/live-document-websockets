@@ -4,6 +4,7 @@ import {
   updateDocument,
   getAllDocuments,
   createDocument,
+  deleteDocument,
 } from "./database-operations.js";
 
 io.on("connection", (socket) => {
@@ -42,6 +43,15 @@ io.on("connection", (socket) => {
       updateDocument(documentName, text);
 
       socket.to(documentName).emit("text_value_server_to_client", text); // I could use io.emit() to send this event to all clients, but I need to send to all but this one that is emitting. I am getting the message from Front-end and sending back to all sockets connected. Another detail is that I am doing it just for socket connected at the same room
+    }
+  });
+
+  socket.on("deleteDocument", async (documentName) => {
+    const result = await deleteDocument(documentName);
+    if (result["deletedCount"]) {
+      io.emit("documentDeleted", documentName);
+    } else {
+      io.emit("documentFailedDeletion", documentName);
     }
   });
 
