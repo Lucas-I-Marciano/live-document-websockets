@@ -3,13 +3,8 @@ import {
   findDocument,
   updateDocument,
   getAllDocuments,
+  createDocument,
 } from "./database-operations.js";
-
-const documentText = {
-  JavaScript: "Javas",
-  Node: "",
-  "Socket.io": "",
-};
 
 io.on("connection", (socket) => {
   // console.log(`a user connected. ID: ${socket.id}`);
@@ -20,6 +15,15 @@ io.on("connection", (socket) => {
     cursor.forEach((document) => {
       socket.emit("documentNameToIndex", document["name"]);
     });
+  });
+
+  socket.on("addDocument", async (documentName) => {
+    const result = await createDocument(documentName);
+    if (result["acknowledged"]) {
+      socket.nsp.emit("documentCreated");
+    } else {
+      socket.nsp.emit("documentFailedCreation");
+    }
   });
 
   // Document socket

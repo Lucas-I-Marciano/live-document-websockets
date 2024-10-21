@@ -26,3 +26,11 @@ export function getAllDocuments() {
 
   return cursorResult;
 }
+
+export function createDocument(documentName) {
+  const result = documents.insertOne({
+    name: documentName,
+    text: "",
+  });
+  return result;
+}
