@@ -8,7 +8,8 @@ Connects text documents via websocket, enabling real-time communication between 
 
 Check out this demo video to see the project in action:
 
-https://github.com/user-attachments/assets/9eb67e7c-19b3-48e2-9be1-6252b847bd9b
+https://github.com/user-attachments/assets/a095ab5b-6816-4bd4-82e6-ef487e1cde56
+
 
 
 
