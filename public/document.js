@@ -5,7 +5,13 @@ const documentName = new URLSearchParams(window.location.search).get("name"); //
 const documentTitle = document.getElementById("document-title");
 documentTitle.innerText = documentName;
 
+const buttonDelete = document.getElementById("delete-document");
+
 socketEmitEvent("documentName", documentName);
+
+buttonDelete.addEventListener("click", () => {
+  socketEmitEvent("deleteDocument", documentName);
+});
 
 textEditor.addEventListener("keyup", () => {
   socketEmitEvent("keyupEvent", { text: textEditor.value, documentName });
@@ -13,4 +19,10 @@ textEditor.addEventListener("keyup", () => {
 
 export function updateTextEditor(text) {
   textEditor.value = text;
+}
+
+export function returnHomeFromDocument(documentNameArg) {
+  if (documentNameArg === documentName) {
+    window.location.href = `http://${window.location.host}`;
+  }
 }
