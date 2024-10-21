@@ -20,9 +20,9 @@ io.on("connection", (socket) => {
   socket.on("addDocument", async (documentName) => {
     const result = await createDocument(documentName);
     if (result["acknowledged"]) {
-      socket.nsp.emit("documentCreated");
+      io.emit("documentCreated");
     } else {
-      socket.nsp.emit("documentFailedCreation");
+      io.emit("documentFailedCreation");
     }
   });
 

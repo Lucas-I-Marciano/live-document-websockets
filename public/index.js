@@ -21,7 +21,10 @@ export function addDocumentList(documentName) {
 }
 
 export function reloadIndexPage() {
-  if (window.location.pathname === "/") {
+  if (
+    (window.location.pathname === "/") |
+    (window.location.pathname === "/index.html")
+  ) {
     window.location.reload();
   }
 }
