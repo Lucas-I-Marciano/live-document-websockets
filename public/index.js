@@ -28,3 +28,10 @@ export function reloadIndexPage() {
     window.location.reload();
   }
 }
+
+export function pageAlert(documentName) {
+  const text = `Document ${documentName} already exists\nDo you want to be redirected there?`;
+  if (confirm(text)) {
+    window.location.href = `http://${window.location.host}/document.html?name=${documentName}`;
+  }
+}

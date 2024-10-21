@@ -19,11 +19,16 @@ io.on("connection", (socket) => {
   });
 
   socket.on("addDocument", async (documentName) => {
-    const result = await createDocument(documentName);
-    if (result["acknowledged"]) {
-      io.emit("documentCreated");
+    const isDocumentedCreated = await findDocument(documentName);
+    if (!isDocumentedCreated) {
+      const result = await createDocument(documentName);
+      if (result["acknowledged"]) {
+        io.emit("documentCreated");
+      } else {
+        io.emit("documentFailedCreation");
+      }
     } else {
-      io.emit("documentFailedCreation");
+      io.emit("documentAlreadyCreated", documentName);
     }
   });
 

@@ -23,6 +23,6 @@ export function updateTextEditor(text) {
 
 export function returnHomeFromDocument(documentNameArg) {
   if (documentNameArg === documentName) {
-    window.location.href = "http://localhost:3000/";
+    window.location.href = `http://${window.location.host}`;
   }
 }
