@@ -5,7 +5,7 @@ import {
   getAllDocuments,
   createDocument,
   deleteDocument,
-} from "./database-operations.js";
+} from "./db/operations.js";
 
 io.on("connection", (socket) => {
   // console.log(`a user connected. ID: ${socket.id}`);
