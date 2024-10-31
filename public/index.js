@@ -12,7 +12,7 @@ formAdd.addEventListener("submit", (event) => {
 export function addDocumentList(documentName) {
   documentList.innerHTML += `
         <a
-            href="document.html?name=${documentName}"
+            href="./document/document.html?name=${documentName}"
             class="list-group-item list-group-item-action"
         >
             ${documentName}
