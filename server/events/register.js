@@ -11,7 +11,7 @@ export function registerEvents(socket, io) {
       hash,
     });
     if (creatingUser["acknowledged"]) {
-      io.emit("userCreated");
+      io.emit("userCreated", data["name"]);
     }
   });
 }
