@@ -10,3 +10,7 @@ socket.on("userCreated", (name) => {
   pageAlert(`User ${name} created!`);
   cleanFields();
 });
+
+socket.on("userExists", (name) => {
+  pageAlert(`User ${name} already exists!`);
+});
