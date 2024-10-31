@@ -1,5 +1,5 @@
-import { randomBytes, scryptSync } from "crypto";
 import { createUser, findUser } from "../db/users.js";
+import { createPassHash } from "../../utils/createHash.js";
 
 export function registerEvents(socket, io) {
   socket.on("createUser", async (data) => {
@@ -8,8 +8,7 @@ export function registerEvents(socket, io) {
     });
 
     if (!searchingUser) {
-      const salt = randomBytes(16).toString("hex");
-      const hash = scryptSync(data["password"], salt, 64).toString("hex");
+      const [salt, hash] = createPassHash(data["password"]);
       const creatingUser = await createUser({
         name: data["name"],
         salt,
