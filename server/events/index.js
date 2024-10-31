@@ -2,7 +2,7 @@ import {
   findDocument,
   getAllDocuments,
   createDocument,
-} from "../db/operations.js";
+} from "../db/documents.js";
 
 // Index socket
 export function indexEvents(socket, io) {

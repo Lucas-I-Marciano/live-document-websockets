@@ -2,7 +2,7 @@ import {
   findDocument,
   updateDocument,
   deleteDocument,
-} from "../db/operations.js";
+} from "../db/documents.js";
 
 // Document socket
 export function documentEvents(socket, io) {
