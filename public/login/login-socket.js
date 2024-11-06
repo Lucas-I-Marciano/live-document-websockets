@@ -1,4 +1,6 @@
 import { loginAlert, redirect } from "./login.js";
+import { storeLocalStorage } from "../utils/storeLocalStorage.js";
+import { createCookie } from "../utils/cookies.js";
 
 const socket = io();
 
@@ -7,7 +9,7 @@ export function emitGeneralEvent(eventName, arg) {
 }
 
 socket.on("userAuthenticated", (jwtToken) => {
-  window.localStorage.setItem("token", jwtToken);
+  createCookie("token", jwtToken);
   loginAlert(`User Authenticated`);
   redirect("/");
 });

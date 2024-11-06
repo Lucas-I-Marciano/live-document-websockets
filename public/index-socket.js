@@ -1,8 +1,9 @@
 import { addDocumentList, pageAlert, reloadIndexPage } from "./index.js";
+import { getCookie } from "./utils/cookies.js";
 
 const socket = io("/validate", {
   query: {
-    token: String(window.localStorage.getItem("token")),
+    token: getCookie("token"),
   },
 });
 

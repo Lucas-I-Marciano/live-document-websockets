@@ -1,5 +1,6 @@
 import "./index-socket.js";
 import { emitGeneralEvent } from "./index-socket.js";
+import { clearCookie } from "./utils/cookies.js";
 
 const documentList = document.getElementById("document-list");
 const formAdd = document.getElementById("form-add-document");
@@ -12,7 +13,7 @@ formAdd.addEventListener("submit", (event) => {
 });
 
 buttonLogout.addEventListener("click", () => {
-  window.localStorage.clear();
+  clearCookie("token");
   window.location.href = "/login/index.html";
 });
 

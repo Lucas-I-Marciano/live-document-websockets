@@ -1,8 +1,9 @@
+import { getCookie } from "../utils/cookies.js";
 import { returnHomeFromDocument, updateTextEditor } from "./document.js";
 
 const socket = io("/validate", {
   query: {
-    token: String(window.localStorage.getItem("token")),
+    token: getCookie("token"),
   },
 });
 
