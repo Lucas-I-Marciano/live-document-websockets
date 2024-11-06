@@ -1,6 +1,10 @@
 import { addDocumentList, pageAlert, reloadIndexPage } from "./index.js";
 
-const socket = io();
+const socket = io("/validate", {
+  query: {
+    token: String(window.localStorage.getItem("token")),
+  },
+});
 
 socket.emit("loadIndex");
 

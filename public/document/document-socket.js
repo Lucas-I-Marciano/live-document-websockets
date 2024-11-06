@@ -1,6 +1,10 @@
 import { returnHomeFromDocument, updateTextEditor } from "./document.js";
 
-const socket = io();
+const socket = io("/validate", {
+  query: {
+    token: String(window.localStorage.getItem("token")),
+  },
+});
 
 export function socketEmitEvent(eventName, arg) {
   socket.emit(eventName, arg);

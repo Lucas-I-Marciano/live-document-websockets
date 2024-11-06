@@ -12,6 +12,7 @@ formAdd.addEventListener("submit", (event) => {
 });
 
 buttonLogout.addEventListener("click", () => {
+  window.localStorage.clear();
   window.location.href = "/login/index.html";
 });
 

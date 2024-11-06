@@ -1,3 +1,4 @@
+import { validateJwt } from "../../utils/createJwt.js";
 import {
   findDocument,
   getAllDocuments,

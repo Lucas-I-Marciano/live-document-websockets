@@ -5,3 +5,7 @@ export function createJwt(payload) {
     expiresIn: "1h",
   });
 }
+
+export function validateJwt(token) {
+  return jwt.verify(token, process.env.JWT_SECRET);
+}
