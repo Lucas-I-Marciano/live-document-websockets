@@ -38,9 +38,17 @@ export function reloadIndexPage() {
   }
 }
 
-export function pageAlert(documentName) {
+export function pageAlertDocumentExists(documentName) {
   const text = `Document ${documentName} already exists\nDo you want to be redirected there?`;
   if (confirm(text)) {
     window.location.href = `http://${window.location.host}/document.html?name=${documentName}`;
   }
+}
+
+export function pageAlert(text) {
+  alert(text);
+}
+
+export function returnLoginFromIndex() {
+  window.location.href = `http://${window.location.host}/login/index.html`;
 }

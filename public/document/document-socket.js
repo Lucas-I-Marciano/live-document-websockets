@@ -1,5 +1,10 @@
 import { getCookie } from "../utils/cookies.js";
-import { returnHomeFromDocument, updateTextEditor } from "./document.js";
+import {
+  documentAlert,
+  returnHomeFromDocument,
+  returnLoginFromDocument,
+  updateTextEditor,
+} from "./document.js";
 
 const socket = io("/validate", {
   query: {
@@ -10,6 +15,11 @@ const socket = io("/validate", {
 export function socketEmitEvent(eventName, arg) {
   socket.emit(eventName, arg);
 }
+
+socket.on("connect_error", (error) => {
+  documentAlert(error.message);
+  returnLoginFromDocument();
+});
 
 socket.on("textLoadedServerToClient", (arg) => {
   updateTextEditor(arg);
