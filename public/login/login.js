@@ -10,3 +10,10 @@ myForm.addEventListener("submit", (event) => {
   const password = passwordElement.value;
   emitGeneralEvent("authenticateUser", { name, password });
 });
+
+export function redirect(path) {
+  window.location.href = path;
+}
+export function loginAlert(message) {
+  alert(message);
+}
