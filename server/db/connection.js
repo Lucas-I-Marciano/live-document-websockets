@@ -1,8 +1,5 @@
 import { MongoClient } from "mongodb";
 
-import dotenv from "dotenv";
-dotenv.config();
-
 const urlConnection = `mongodb+srv://admin:${process.env.DB_PASSWORD}@mycluster.mcagnpx.mongodb.net/?retryWrites=true&w=majority&appName=MyCluster`;
 
 let documents, users;

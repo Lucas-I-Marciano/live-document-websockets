@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import { io } from "./server.js";
 import { indexEvents } from "./events/index.js";
 import { documentEvents } from "./events/document.js";

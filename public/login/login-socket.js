@@ -6,7 +6,8 @@ export function emitGeneralEvent(eventName, arg) {
   socket.emit(eventName, arg);
 }
 
-socket.on("userAuthenticated", (name) => {
-  loginAlert(`User:${name}\nAuthenticated`);
+socket.on("userAuthenticated", (jwtToken) => {
+  console.log(jwtToken);
+  loginAlert(`User Authenticated`);
   redirect("/");
 });
