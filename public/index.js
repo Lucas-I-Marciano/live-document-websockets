@@ -28,6 +28,7 @@ export function addDocumentList(documentName) {
 }
 
 export function reloadIndexPage() {
+  console.log("Executei");
   if (
     (window.location.pathname === "/") |
     (window.location.pathname === "/index.html")

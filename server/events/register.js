@@ -15,10 +15,10 @@ export function registerEvents(socket, io) {
         hash,
       });
       if (creatingUser["acknowledged"]) {
-        io.emit("userCreated", data["name"]);
+        socket.nsp.emit("userCreated", data["name"]);
       }
     } else {
-      io.emit("userExists", data["name"]);
+      socket.nsp.emit("userExists", data["name"]);
     }
   });
 }

@@ -7,9 +7,9 @@ import { registerEvents } from "./events/register.js";
 import { loginEvents } from "./events/login.js";
 import { validateJwt } from "../utils/createJwt.js";
 
-const withTokenNsp = io.of("/validate");
+const validateNsp = io.of("/validate");
 
-withTokenNsp.use((socket, next) => {
+validateNsp.use((socket, next) => {
   try {
     const decoded = validateJwt(socket.handshake.query["token"]);
     if (decoded) {
@@ -22,7 +22,7 @@ withTokenNsp.use((socket, next) => {
   }
 });
 
-withTokenNsp.on("connection", (socket) => {
+validateNsp.on("connection", (socket) => {
   indexEvents(socket, io);
   documentEvents(socket, io);
 });

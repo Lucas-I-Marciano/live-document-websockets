@@ -27,9 +27,9 @@ export function documentEvents(socket, io) {
   socket.on("deleteDocument", async (documentName) => {
     const result = await deleteDocument(documentName);
     if (result["deletedCount"]) {
-      io.emit("documentDeleted", documentName);
+      socket.nsp.emit("documentDeleted", documentName);
     } else {
-      io.emit("documentFailedDeletion", documentName);
+      socket.nsp.emit("documentFailedDeletion", documentName);
     }
   });
 }

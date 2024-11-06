@@ -19,12 +19,12 @@ export function indexEvents(socket, io) {
     if (!isDocumentedCreated) {
       const result = await createDocument(documentName);
       if (result["acknowledged"]) {
-        io.emit("documentCreated");
+        socket.nsp.emit("documentCreated");
       } else {
-        io.emit("documentFailedCreation");
+        socket.nsp.emit("documentFailedCreation");
       }
     } else {
-      io.emit("documentAlreadyCreated", documentName);
+      socket.nsp.emit("documentAlreadyCreated", documentName);
     }
   });
 }
