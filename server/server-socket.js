@@ -5,21 +5,12 @@ import { indexEvents } from "./events/index.js";
 import { documentEvents } from "./events/document.js";
 import { registerEvents } from "./events/register.js";
 import { loginEvents } from "./events/login.js";
-import { validateJwt } from "../utils/createJwt.js";
+import { validateUser } from "./middleware/validateUser.js";
 
 const validateNsp = io.of("/validate");
 
 validateNsp.use((socket, next) => {
-  try {
-    const decoded = validateJwt(socket.handshake.query["token"]);
-    if (decoded) {
-      next();
-    } else {
-      next(new Error());
-    }
-  } catch (error) {
-    console.error(error.message);
-  }
+  validateUser(socket, next);
 });
 
 validateNsp.on("connection", (socket) => {
