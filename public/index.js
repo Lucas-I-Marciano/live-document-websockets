@@ -4,9 +4,15 @@ import { emitGeneralEvent } from "./index-socket.js";
 const documentList = document.getElementById("document-list");
 const formAdd = document.getElementById("form-add-document");
 const inputDocument = document.getElementById("input-document");
+const buttonLogout = document.getElementById("button-logout");
+
 formAdd.addEventListener("submit", (event) => {
   emitGeneralEvent("addDocument", inputDocument.value);
   event.preventDefault();
+});
+
+buttonLogout.addEventListener("click", () => {
+  window.location.href = "/login/index.html";
 });
 
 export function addDocumentList(documentName) {

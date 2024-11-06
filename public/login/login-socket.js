@@ -8,6 +8,7 @@ export function emitGeneralEvent(eventName, arg) {
 
 socket.on("userAuthenticated", (jwtToken) => {
   console.log(jwtToken);
+  window.localStorage.setItem("token", jwtToken);
   loginAlert(`User Authenticated`);
   redirect("/");
 });
