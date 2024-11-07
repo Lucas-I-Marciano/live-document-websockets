@@ -18,6 +18,12 @@
   <body class="col-lg-6 mt-3 mx-auto">
     <header>
       <h1 class="text-center display-2 mb-4">AluraDocs</h1>
+      <button
+        id="button-logout"
+        class="btn btn-outline-primary position-absolute top-0 end-0 mt-5 me-5"
+      >
+        Logout
+      </button>
     </header>
 
     <main class="w-75 mx-auto">
@@ -51,7 +57,7 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script src="./index.js" type="module"></script>
   </body>
 </html>

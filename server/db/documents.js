@@ -1,4 +1,4 @@
-import { documents } from "./database-connection.js";
+import { documents } from "./connection.js";
 
 export function findDocument(documentName) {
   const document = documents.findOne({

@@ -26,3 +26,11 @@ export function returnHomeFromDocument(documentNameArg) {
     window.location.href = `http://${window.location.host}`;
   }
 }
+
+export function returnLoginFromDocument() {
+  window.location.href = `http://${window.location.host}/login/index.html`;
+}
+
+export function documentAlert(text) {
+  alert(text);
+}
