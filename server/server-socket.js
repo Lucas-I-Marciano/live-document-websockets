@@ -14,8 +14,8 @@ validateNsp.use((socket, next) => {
 });
 
 validateNsp.on("connection", (socket) => {
-  indexEvents(socket, io);
-  documentEvents(socket, io);
+  indexEvents(socket, validateNsp);
+  documentEvents(socket, validateNsp);
 });
 
 io.on("connection", (socket) => {
