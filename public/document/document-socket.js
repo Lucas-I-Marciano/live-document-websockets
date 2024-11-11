@@ -1,8 +1,10 @@
 import { getCookie } from "../utils/cookies.js";
 import {
+  addInnerHtmlUsersList,
   documentAlert,
   returnHomeFromDocument,
   returnLoginFromDocument,
+  updateInnerHtmlUsersList,
   updateTextEditor,
 } from "./document.js";
 
@@ -21,8 +23,16 @@ socket.on("connect_error", (error) => {
   returnLoginFromDocument();
 });
 
-socket.on("textLoadedServerToClient", (arg) => {
-  updateTextEditor(arg);
+socket.on("sendingPayload", (payload) => {
+  socket.emit("sendingBackPayload", payload);
+});
+
+socket.on("documentPayloadLoaded", ({ text, users, document }) => {
+  updateInnerHtmlUsersList("");
+  users.forEach((user) => {
+    addInnerHtmlUsersList(`<li class="list-group-item">${user}</li>`);
+  });
+  updateTextEditor(text);
 });
 
 socket.on("text_value_server_to_client", (arg) => {

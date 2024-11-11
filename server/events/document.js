@@ -1,4 +1,8 @@
 import {
+  addUserDocument,
+  getUsersFromDocument,
+} from "../../utils/usersConnected.js";
+import {
   findDocument,
   updateDocument,
   deleteDocument,
@@ -6,13 +10,21 @@ import {
 
 // Document socket
 export function documentEvents(socket, io) {
-  socket.on("documentName", async (arg) => {
-    const document = await findDocument(arg);
-    socket.join(document.name);
+  socket.on("sendingBackPayload", (payload) => {
+    socket.on("documentLoad", async (arg) => {
+      const document = await findDocument(arg);
 
-    if (document) {
-      socket.nsp.to(arg).emit("textLoadedServerToClient", document.text); // I could use io.to(arg)
-    }
+      if (document) {
+        socket.join(document.name);
+        addUserDocument(payload["username"], document.name);
+        const listUsers = getUsersFromDocument(document.name);
+        socket.nsp.to(arg).emit("documentPayloadLoaded", {
+          text: document.text,
+          users: listUsers,
+          document: document.name,
+        }); // I could use io.to(arg)
+      }
+    });
   });
 
   socket.on("keyupEvent", ({ text, documentName }) => {
