@@ -7,7 +7,7 @@ documentTitle.innerText = documentName;
 
 const buttonDelete = document.getElementById("delete-document");
 
-socketEmitEvent("documentName", documentName);
+socketEmitEvent("documentLoad", documentName);
 
 buttonDelete.addEventListener("click", () => {
   socketEmitEvent("deleteDocument", documentName);

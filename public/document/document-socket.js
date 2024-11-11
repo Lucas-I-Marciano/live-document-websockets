@@ -21,8 +21,12 @@ socket.on("connect_error", (error) => {
   returnLoginFromDocument();
 });
 
-socket.on("textLoadedServerToClient", (arg) => {
-  updateTextEditor(arg);
+socket.on("sendingPayload", (payload) => {
+  socket.emit("sendingBackPayload", payload);
+});
+
+socket.on("documentPayloadLoaded", ({ text, user, document }) => {
+  updateTextEditor(text);
 });
 
 socket.on("text_value_server_to_client", (arg) => {
