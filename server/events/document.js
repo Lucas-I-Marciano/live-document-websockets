@@ -1,4 +1,8 @@
 import {
+  addUserDocument,
+  getUsersFromDocument,
+} from "../../utils/usersConnected.js";
+import {
   findDocument,
   updateDocument,
   deleteDocument,
@@ -12,9 +16,11 @@ export function documentEvents(socket, io) {
 
       if (document) {
         socket.join(document.name);
+        addUserDocument(payload["username"], document.name);
+        const listUsers = getUsersFromDocument(document.name);
         socket.nsp.to(arg).emit("documentPayloadLoaded", {
           text: document.text,
-          user: payload["username"],
+          users: listUsers,
           document: document.name,
         }); // I could use io.to(arg)
       }
