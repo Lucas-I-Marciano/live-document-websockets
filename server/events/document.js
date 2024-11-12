@@ -2,6 +2,7 @@ import {
   addUserDocument,
   getUserAndDocument,
   getUsersFromDocument,
+  isUserOnDocument,
   removeUserFromDocument,
 } from "../../utils/usersConnected.js";
 import {
@@ -18,20 +19,28 @@ export function documentEvents(socket, io) {
 
       if (document) {
         socket.join(document.name);
-        addUserDocument(payload["username"], document.name);
-        const listUsers = getUsersFromDocument(document.name);
-        socket.nsp.to(arg).emit("documentPayloadLoaded", {
-          text: document.text,
-          users: listUsers,
-          document: document.name,
-        }); // I could use io.to(arg)
+        const isUserConnected = isUserOnDocument(
+          payload["username"],
+          document["name"]
+        );
+        if (!isUserConnected) {
+          addUserDocument(payload["username"], document.name);
+          const listUsers = getUsersFromDocument(document.name);
+          socket.nsp.to(arg).emit("documentPayloadLoaded", {
+            text: document.text,
+            users: listUsers,
+            document: document.name,
+          }); // I could use io.to(arg)
+          socket.on("disconnect", () => {
+            // console.log(getUserAndDocument(payload["username"], document.name));
+            removeUserFromDocument(payload["username"]);
+            const listUsers = getUsersFromDocument(document.name);
+            io.emit("userDisconnected", listUsers);
+          });
+        } else {
+          socket.emit("userAlreadyConnected", document.name);
+        }
       }
-      socket.on("disconnect", () => {
-        // console.log(getUserAndDocument(payload["username"], document.name));
-        removeUserFromDocument(payload["username"]);
-        const listUsers = getUsersFromDocument(document.name);
-        io.emit("userDisconnected", listUsers);
-      });
     });
   });
 

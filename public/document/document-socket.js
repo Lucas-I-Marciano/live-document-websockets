@@ -2,6 +2,7 @@ import { getCookie } from "../utils/cookies.js";
 import {
   addInnerHtmlUsersList,
   documentAlert,
+  returnHome,
   returnHomeFromDocument,
   returnLoginFromDocument,
   updateInnerHtmlUsersList,
@@ -21,6 +22,11 @@ export function socketEmitEvent(eventName, arg) {
 socket.on("connect_error", (error) => {
   documentAlert(error.message);
   returnLoginFromDocument();
+});
+
+socket.on("userAlreadyConnected", (documentName) => {
+  documentAlert("User already connected");
+  returnHome();
 });
 
 socket.on("sendingPayload", (payload) => {
