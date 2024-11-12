@@ -27,7 +27,9 @@ export function removeUserFromDocument(user, document) {
   const index = usersList.findIndex((object) => {
     return (object["user"] === user) & object;
   });
-  usersList.splice(index, 1);
+  if (index !== -1) {
+    usersList.splice(index, 1);
+  }
 }
 
 export function isUserOnDocument(user, document) {
