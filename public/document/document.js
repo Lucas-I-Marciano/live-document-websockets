@@ -41,6 +41,10 @@ export function returnLoginFromDocument() {
   window.location.href = `http://${window.location.host}/login/index.html`;
 }
 
+export function returnHome() {
+  window.location.href = `http://${window.location.host}`;
+}
+
 export function documentAlert(text) {
   alert(text);
 }

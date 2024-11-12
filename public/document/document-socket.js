@@ -2,6 +2,7 @@ import { getCookie } from "../utils/cookies.js";
 import {
   addInnerHtmlUsersList,
   documentAlert,
+  returnHome,
   returnHomeFromDocument,
   returnLoginFromDocument,
   updateInnerHtmlUsersList,
@@ -23,6 +24,11 @@ socket.on("connect_error", (error) => {
   returnLoginFromDocument();
 });
 
+socket.on("userAlreadyConnected", (documentName) => {
+  documentAlert("User already connected");
+  returnHome();
+});
+
 socket.on("sendingPayload", (payload) => {
   socket.emit("sendingBackPayload", payload);
 });
@@ -37,6 +43,13 @@ socket.on("documentPayloadLoaded", ({ text, users, document }) => {
 
 socket.on("text_value_server_to_client", (arg) => {
   updateTextEditor(arg);
+});
+
+socket.on("userDisconnected", (usersList) => {
+  updateInnerHtmlUsersList("");
+  usersList.forEach((user) => {
+    addInnerHtmlUsersList(`<li class="list-group-item">${user}</li>`);
+  });
 });
 
 socket.on("documentDeleted", (documentName) => {
