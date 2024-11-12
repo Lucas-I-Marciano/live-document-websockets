@@ -29,6 +29,8 @@ export function documentEvents(socket, io) {
       socket.on("disconnect", () => {
         // console.log(getUserAndDocument(payload["username"], document.name));
         removeUserFromDocument(payload["username"]);
+        const listUsers = getUsersFromDocument(document.name);
+        io.emit("userDisconnected", listUsers);
       });
     });
   });

@@ -39,6 +39,13 @@ socket.on("text_value_server_to_client", (arg) => {
   updateTextEditor(arg);
 });
 
+socket.on("userDisconnected", (usersList) => {
+  updateInnerHtmlUsersList("");
+  usersList.forEach((user) => {
+    addInnerHtmlUsersList(`<li class="list-group-item">${user}</li>`);
+  });
+});
+
 socket.on("documentDeleted", (documentName) => {
   returnHomeFromDocument(documentName);
 });
