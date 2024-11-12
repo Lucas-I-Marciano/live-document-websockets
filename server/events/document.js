@@ -1,6 +1,8 @@
 import {
   addUserDocument,
+  getUserAndDocument,
   getUsersFromDocument,
+  removeUserFromDocument,
 } from "../../utils/usersConnected.js";
 import {
   findDocument,
@@ -24,6 +26,10 @@ export function documentEvents(socket, io) {
           document: document.name,
         }); // I could use io.to(arg)
       }
+      socket.on("disconnect", () => {
+        // console.log(getUserAndDocument(payload["username"], document.name));
+        removeUserFromDocument(payload["username"]);
+      });
     });
   });
 
